@@ -12,7 +12,11 @@ What goes here:
 # Embedding models with display names
 EMBEDDING_MODELS = {
     "all-MiniLM-L6-v2": "Sentence Transformers - All MiniLM L6 v2",
-    "bge-small-en": "BGE - Small English",
+    "sentence-transformers/all-mpnet-base-v2": "Sentence Transformers - All MPNet Base v2",
+    "BAAI/bge-base-en-v1.5": "BGE - Base English",
+    "intfloat/e5-large-v2": "E5 - Large v2",
+    "intfloat/e5-small-v2": "E5 - Small v2",
+    "sentence-transformers/allenai-specter": "Sentence Transformers - AllenAI SPECTER",
 }
 
 # Vector store options with display names

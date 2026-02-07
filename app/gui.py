@@ -31,6 +31,12 @@ def initialize_session_state():
         st.session_state.embedding_model = None
     if 'vector_db_type' not in st.session_state:
         st.session_state.vector_db_type = None
+    if 'last_results' not in st.session_state:
+        st.session_state.last_results = None
+    if 'last_query' not in st.session_state:
+        st.session_state.last_query = None
+    if 'last_top_k' not in st.session_state:
+        st.session_state.last_top_k = None
 
 
 def calculate_total_size(files) -> tuple[int, str]:
@@ -152,6 +158,116 @@ def perform_search(query: str, top_k: int) -> Optional[List[Dict]]:
         return None
 
 
+def _render_setup_section():
+    """Render the setup section (upload and configuration)."""
+    
+    # ========================================================================
+    # Dataset Upload
+    # ========================================================================
+    st.header("📂 Dataset Upload")
+    
+    uploaded_files = st.file_uploader(
+        "Upload academic documents (.txt format)",
+        type=['txt'],
+        accept_multiple_files=True,
+        help="Upload at least 10-15 documents for optimal semantic search results",
+        key="file_uploader"
+    )
+    
+    if uploaded_files:
+        num_files = len(uploaded_files)
+        total_bytes, size_str = calculate_total_size(uploaded_files)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Documents Uploaded", num_files)
+        with col2:
+            st.metric("Total Dataset Size", size_str)
+        
+        if num_files < 10:
+            st.warning(f"⚠️ You have uploaded {num_files} files. Consider uploading at least 10-15 documents for better results.")
+    else:
+        st.info("👆 Please upload your document dataset to begin.")
+    
+    st.divider()
+    
+    # ========================================================================
+    # Model Configuration
+    # ========================================================================
+    st.header("⚙️ Model Configuration")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        embedding_model = st.selectbox(
+            "Select Embedding Model",
+            options=list(EMBEDDING_MODELS.keys()),
+            format_func=lambda x: EMBEDDING_MODELS[x],
+            help="Choose a HuggingFace embedding model for semantic encoding",
+            key="embedding_model_select"
+        )
+    
+    with col2:
+        vector_db = st.selectbox(
+            "Select Vector Database",
+            options=list(VECTOR_STORES.keys()),
+            format_func=lambda x: VECTOR_STORES[x],
+            help="Choose the vector database backend for similarity search",
+            key="vector_db_select"
+        )
+    
+    st.markdown("")  # Spacing
+    
+    # Show initialize or reset button based on state
+    if st.session_state.is_initialized:
+        # Show reset button when already initialized
+        if st.button(
+            "🔄 Reset System",
+            type="secondary",
+            use_container_width=True,
+            key="reset_button"
+        ):
+            st.session_state.is_initialized = False
+            st.session_state.vector_store = None
+            st.session_state.documents = []
+            st.session_state.last_results = None
+            st.session_state.last_query = None
+            st.session_state.last_top_k = None
+            st.rerun()
+    else:
+        # Show initialize button when not initialized
+        init_button_disabled = not uploaded_files
+        
+        if st.button(
+            "🚀 Initialize Semantic Memory",
+            disabled=init_button_disabled,
+            type="primary",
+            use_container_width=True,
+            key="init_button"
+        ):
+            if not uploaded_files:
+                st.error("❌ Please upload documents before initializing.")
+            else:
+                with st.spinner("🔄 Loading documents, generating embeddings, and building vector index..."):
+                    # Save uploaded files temporarily
+                    temp_dir = Path("/tmp/semantic_search_docs")
+                    file_paths = save_uploaded_files(uploaded_files, temp_dir)
+                    
+                    # Initialize semantic memory
+                    success = initialize_semantic_memory(
+                        file_paths=file_paths,
+                        embedding_model=embedding_model,
+                        vector_db=vector_db
+                    )
+                    
+                    if success:
+                        st.success(f"✅ Semantic memory initialized successfully!")
+                        st.balloons()
+                        st.rerun()  # Rerun to update UI and focus on search section
+    
+    st.divider()
+
+
 # ============================================================================
 # MAIN GUI
 # ============================================================================
@@ -175,180 +291,120 @@ def main():
     st.divider()
     
     # ========================================================================
-    # SECTION 1: Dataset Upload
+    # SECTION 1 & 2: Setup (Collapsible after initialization)
     # ========================================================================
-    st.header("📂 Dataset Upload")
     
-    uploaded_files = st.file_uploader(
-        "Upload academic documents (.txt format)",
-        type=['txt'],
-        accept_multiple_files=True,
-        help="Upload at least 10-15 documents for optimal semantic search results"
-    )
-    
-    if uploaded_files:
-        num_files = len(uploaded_files)
-        total_bytes, size_str = calculate_total_size(uploaded_files)
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric("Documents Uploaded", num_files)
-        with col2:
-            st.metric("Total Dataset Size", size_str)
-        
-        if num_files < 10:
-            st.warning(f"⚠️ You have uploaded {num_files} files. Consider uploading at least 10-15 documents for better results.")
-    else:
-        st.info("👆 Please upload your document dataset to begin.")
-    
-    st.divider()
-    
-    # ========================================================================
-    # SECTION 2: Model Configuration
-    # ========================================================================
-    st.header("⚙️ Model Configuration")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        embedding_model = st.selectbox(
-            "Select Embedding Model",
-            options=list(EMBEDDING_MODELS.keys()),
-            format_func=lambda x: EMBEDDING_MODELS[x],
-            help="Choose a HuggingFace embedding model for semantic encoding"
-        )
-    
-    with col2:
-        vector_db = st.selectbox(
-            "Select Vector Database",
-            options=list(VECTOR_STORES.keys()),
-            format_func=lambda x: VECTOR_STORES[x],
-            help="Choose the vector database backend for similarity search"
-        )
-    
-    st.markdown("")  # Spacing
-    
-    # Initialize button
-    init_button_disabled = not uploaded_files
-    
-    if st.button(
-        "🚀 Initialize Semantic Memory",
-        disabled=init_button_disabled,
-        type="primary",
-        use_container_width=True
-    ):
-        if not uploaded_files:
-            st.error("❌ Please upload documents before initializing.")
-        else:
-            with st.spinner("🔄 Loading documents, generating embeddings, and building vector index..."):
-                # Save uploaded files temporarily
-                temp_dir = Path("/tmp/semantic_search_docs")
-                file_paths = save_uploaded_files(uploaded_files, temp_dir)
-                
-                # Initialize semantic memory
-                success = initialize_semantic_memory(
-                    file_paths=file_paths,
-                    embedding_model=embedding_model,
-                    vector_db=vector_db
-                )
-                
-                if success:
-                    st.success(f"✅ Semantic memory initialized successfully with {vector_db} and {EMBEDDING_MODELS[embedding_model]}!")
-                    st.balloons()
-    
-    # Display initialization status
+    # If system is initialized, show setup section in collapsed expander
     if st.session_state.is_initialized:
-        st.info(f"✓ System ready | Model: {EMBEDDING_MODELS[st.session_state.embedding_model]} | DB: {st.session_state.vector_db_type}")
-    
-    st.divider()
+        with st.expander("⚙️ System Configuration", expanded=False):
+            _render_setup_section()
+    else:
+        # If not initialized, show setup section prominently
+        _render_setup_section()
     
     # ========================================================================
-    # SECTION 3: Semantic Retrieval
+    # SECTION 3: Semantic Retrieval (Main focus after initialization)
     # ========================================================================
-    st.header("🔎 Semantic Retrieval")
     
-    # Query input
-    query = st.text_input(
-        "Enter your research query",
-        placeholder="e.g., What are the main applications of transformer architectures?",
-        help="Ask questions or describe the information you're looking for"
-    )
-    
-    # Search parameters
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        top_k = st.slider(
-            "Number of results (top-k)",
-            min_value=1,
-            max_value=10,
-            value=3,
-            help="How many relevant document chunks to retrieve"
-        )
-    
-    with col2:
-        st.markdown("")  # Spacing
-        st.markdown("")  # Spacing
-        search_button_disabled = not st.session_state.is_initialized or not query.strip()
+    if st.session_state.is_initialized:
+        st.header("🔎 Semantic Retrieval")
         
-        search_clicked = st.button(
-            "🔍 Search",
-            disabled=search_button_disabled,
-            type="primary",
-            use_container_width=True
-        )
-    
-    # Handle edge cases
-    if search_clicked and not st.session_state.is_initialized:
-        st.error("❌ Please initialize the semantic memory system first.")
-    elif search_clicked and not query.strip():
-        st.error("❌ Please enter a search query.")
-    
-    # Perform search
-    if search_clicked and st.session_state.is_initialized and query.strip():
-        with st.spinner("🔍 Searching through semantic space..."):
-            results = perform_search(query, top_k)
+        # Display system status
+        st.success(f"✓ System Ready | Model: {EMBEDDING_MODELS[st.session_state.embedding_model]} | DB: {st.session_state.vector_db_type} | Documents: {len(st.session_state.documents)}")
+        st.markdown("")
         
-        if results:
-            st.success(f"Found {len(results)} relevant results")
+        # Query input - make it prominent
+        query = st.text_input(
+            "🔍 Enter your research query",
+            placeholder="e.g., What are the main applications of transformer architectures?",
+            help="Ask questions or describe the information you're looking for",
+            key="query_input"
+        )
+        
+        # Search parameters in columns
+        col1, col2 = st.columns([3, 1])
+        
+        with col1:
+            top_k = st.slider(
+                "Number of results (top-k)",
+                min_value=1,
+                max_value=10,
+                value=3,
+                help="How many relevant document chunks to retrieve"
+            )
+        
+        with col2:
             st.markdown("")  # Spacing
+            search_clicked = st.button(
+                "🔍 Search",
+                type="primary",
+                use_container_width=True
+            )
+        
+        # Handle search
+        if search_clicked:
+            if not query.strip():
+                st.error("❌ Please enter a search query.")
+            else:
+                with st.spinner("🔍 Searching through semantic space..."):
+                    results = perform_search(query, top_k)
+                
+                # Store results in session state
+                st.session_state.last_results = results
+                st.session_state.last_query = query
+                st.session_state.last_top_k = top_k
+        
+        # Display results from session state (persists across reruns)
+        if st.session_state.last_results is not None:
+            results = st.session_state.last_results
             
-            # Display results
-            for idx, result in enumerate(results, 1):
-                with st.expander(f"**Rank #{idx}** | {result.get('source', 'Unknown Source')}", expanded=(idx == 1)):
-                    # Extract result data
-                    source = result.get('source', 'Unknown')
-                    content = result.get('content', '')
-                    score = result.get('score', None)
-                    
-                    # Display metadata
-                    col1, col2 = st.columns([3, 1])
-                    with col1:
-                        st.markdown(f"**📄 Source:** `{source}`")
-                    with col2:
-                        if score is not None:
-                            st.markdown(f"**Similarity:** {score:.4f}")
-                    
-                    st.markdown("**📝 Content Preview:**")
-                    
-                    # Preview (first 300 characters)
-                    preview = content[:300]
-                    if len(content) > 300:
-                        preview += "..."
-                    
-                    st.markdown(f"> {preview}")
-                    
-                    # Optional: show full content
-                    if len(content) > 300:
-                        if st.checkbox(f"Show full content", key=f"full_{idx}"):
-                            st.text_area(
-                                "Full Content",
-                                value=content,
-                                height=200,
-                                key=f"content_{idx}"
-                            )
-        else:
-            st.warning("No results found. Try a different query.")
+            if results:
+                st.success(f"✨ Found {len(results)} relevant results for: \"{st.session_state.last_query}\"")
+                st.markdown("")
+                
+                # Display results
+                for idx, result in enumerate(results, 1):
+                    with st.expander(f"**Rank #{idx}** | {result.get('source', 'Unknown Source')}", expanded=(idx == 1)):
+                        # Extract result data
+                        source = result.get('source', 'Unknown')
+                        content = result.get('content', '')
+                        score = result.get('score', None)
+                        
+                        # Display metadata
+                        col1, col2 = st.columns([3, 1])
+                        with col1:
+                            st.markdown(f"**📄 Source:** `{source}`")
+                        with col2:
+                            if score is not None:
+                                st.markdown(f"**Similarity:** {score:.4f}")
+                        
+                        st.markdown("---")
+                        st.markdown("**📝 Content Preview:**")
+                        
+                        # Preview (first 300 characters)
+                        preview = content[:300]
+                        if len(content) > 300:
+                            preview += "..."
+                        
+                        st.markdown(f"> {preview}")
+                        
+                        # Optional: show full content with nested expander
+                        if len(content) > 300:
+                            st.markdown("")
+                            with st.expander("📄 Show Full Content"):
+                                st.text_area(
+                                    "Full Content",
+                                    value=content,
+                                    height=200,
+                                    key=f"content_{idx}",
+                                    label_visibility="collapsed"
+                                )
+            else:
+                st.warning("No results found. Try a different query.")
+    
+    else:
+        # Show placeholder when not initialized
+        st.info("👆 Please upload documents and initialize the semantic memory system to start searching.")
     
     # Footer
     st.divider()

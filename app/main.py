@@ -1,5 +1,5 @@
 """
-If using Streamlit:
+yaad se:
 streamlit run app/main.py
 """
 

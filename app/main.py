@@ -1,13 +1,12 @@
 """
-Purpose:
-Entry point of your application.
-
 If using Streamlit:
 streamlit run app/main.py
-
-This file:
-Imports GUI
-Runs app
-
-Very thin file.
 """
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from gui import main
+
+if __name__ == "__main__":
+    main()

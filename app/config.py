@@ -11,6 +11,7 @@ What goes here:
 
 # Embedding models with display names
 EMBEDDING_MODELS = {
+    "sentence-transformers/all-mpnet-base-v2": "Recommended - All MPNet Base v2 (Best Overall)",
     "all-MiniLM-L6-v2": "Sentence Transformers - All MiniLM L6 v2",
     "sentence-transformers/all-mpnet-base-v2": "Sentence Transformers - All MPNet Base v2",
     "BAAI/bge-base-en-v1.5": "BGE - Base English",

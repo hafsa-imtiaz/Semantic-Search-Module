@@ -1,0 +1,577 @@
+{
+  "metadata": {
+    "generated": "2026-02-13T21:24:48.656297",
+    "total_models": 6,
+    "successful_models": 6,
+    "failed_models": 0,
+    "documents_count": 12,
+    "queries_count": 3,
+    "top_k": 3
+  },
+  "results": [
+    {
+      "model": "sentence-transformers/all-mpnet-base-v2",
+      "model_display": "Sentence Transformers - All MPNet Base v2",
+      "timestamp": "2026-02-13T21:20:04.856166",
+      "queries": [
+        {
+          "query": "How do neural networks and deep learning work?",
+          "query_time_seconds": 0.0302,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_3.txt",
+              "similarity_score": 0.6404,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 2,
+              "source": "document_1.txt",
+              "similarity_score": 0.4808,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            },
+            {
+              "rank": 3,
+              "source": "document_11.txt",
+              "similarity_score": 0.4778,
+              "content_preview": "Attention Mechanisms in Deep Learning\nAttention mechanisms allow neural networks to focus on relevant parts of input data. \nThe self-attention mechani..."
+            }
+          ]
+        },
+        {
+          "query": "What is the difference between machine learning and artificial intelligence?",
+          "query_time_seconds": 0.0282,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_1.txt",
+              "similarity_score": 0.5696,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            },
+            {
+              "rank": 2,
+              "source": "document_3.txt",
+              "similarity_score": 0.4871,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 3,
+              "source": "document_5.txt",
+              "similarity_score": 0.4344,
+              "content_preview": "Reinforcement Learning Concepts\nReinforcement Learning (RL) is a paradigm where an agent learns to make decisions by interacting \nwith an environment...."
+            }
+          ]
+        },
+        {
+          "query": "Explain semantic embeddings and how they enable effective search.",
+          "query_time_seconds": 0.0282,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_8.txt",
+              "similarity_score": 0.6415,
+              "content_preview": "Semantic Search and Embeddings\nSemantic search retrieves documents based on meaning rather than keyword matching. It uses word \nembeddings and sentenc..."
+            },
+            {
+              "rank": 2,
+              "source": "document_10.txt",
+              "similarity_score": 0.5309,
+              "content_preview": "Knowledge Graphs and Information Retrieval\nKnowledge graphs represent structured information about entities and their relationships. \nThey support sem..."
+            },
+            {
+              "rank": 3,
+              "source": "document_12.txt",
+              "similarity_score": 0.4652,
+              "content_preview": "Question Answering Systems\nQuestion answering (QA) systems retrieve relevant documents and extract answers to user queries. \nThey combine information ..."
+            }
+          ]
+        }
+      ],
+      "performance_metrics": {
+        "initialization_time_seconds": 6.677
+      },
+      "status": "success"
+    },
+    {
+      "model": "all-MiniLM-L6-v2",
+      "model_display": "Sentence Transformers - All MiniLM L6 v2",
+      "timestamp": "2026-02-13T21:20:11.625574",
+      "queries": [
+        {
+          "query": "How do neural networks and deep learning work?",
+          "query_time_seconds": 0.0525,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_3.txt",
+              "similarity_score": 0.6465,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 2,
+              "source": "document_4.txt",
+              "similarity_score": 0.5069,
+              "content_preview": "Computer Vision Fundamentals\nComputer vision is an interdisciplinary field that deals with how computers can gain high-level \nunderstanding from digit..."
+            },
+            {
+              "rank": 3,
+              "source": "document_1.txt",
+              "similarity_score": 0.4621,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            }
+          ]
+        },
+        {
+          "query": "What is the difference between machine learning and artificial intelligence?",
+          "query_time_seconds": 0.0853,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_1.txt",
+              "similarity_score": 0.5411,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            },
+            {
+              "rank": 2,
+              "source": "document_3.txt",
+              "similarity_score": 0.4531,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 3,
+              "source": "document_2.txt",
+              "similarity_score": 0.4338,
+              "content_preview": "Natural Language Processing\nNatural Language Processing (NLP) is a field of AI that focuses on the interaction between \ncomputers and human language. ..."
+            }
+          ]
+        },
+        {
+          "query": "Explain semantic embeddings and how they enable effective search.",
+          "query_time_seconds": 0.0403,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_8.txt",
+              "similarity_score": 0.6524,
+              "content_preview": "Semantic Search and Embeddings\nSemantic search retrieves documents based on meaning rather than keyword matching. It uses word \nembeddings and sentenc..."
+            },
+            {
+              "rank": 2,
+              "source": "document_10.txt",
+              "similarity_score": 0.4915,
+              "content_preview": "Knowledge Graphs and Information Retrieval\nKnowledge graphs represent structured information about entities and their relationships. \nThey support sem..."
+            },
+            {
+              "rank": 3,
+              "source": "document_7.txt",
+              "similarity_score": 0.4578,
+              "content_preview": "Transformers and BERT Models\nTransformers are deep learning architectures based on attention mechanisms that process sequences \nin parallel. BERT (Bid..."
+            }
+          ]
+        }
+      ],
+      "performance_metrics": {
+        "initialization_time_seconds": 5.612
+      },
+      "status": "success"
+    },
+    {
+      "model": "BAAI/bge-base-en-v1.5",
+      "model_display": "BGE - Base English",
+      "timestamp": "2026-02-13T21:20:17.417036",
+      "queries": [
+        {
+          "query": "How do neural networks and deep learning work?",
+          "query_time_seconds": 0.0263,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_3.txt",
+              "similarity_score": 0.7495,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 2,
+              "source": "document_11.txt",
+              "similarity_score": 0.6025,
+              "content_preview": "Attention Mechanisms in Deep Learning\nAttention mechanisms allow neural networks to focus on relevant parts of input data. \nThe self-attention mechani..."
+            },
+            {
+              "rank": 3,
+              "source": "document_1.txt",
+              "similarity_score": 0.5954,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            }
+          ]
+        },
+        {
+          "query": "What is the difference between machine learning and artificial intelligence?",
+          "query_time_seconds": 0.0264,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_1.txt",
+              "similarity_score": 0.7276,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            },
+            {
+              "rank": 2,
+              "source": "document_3.txt",
+              "similarity_score": 0.6451,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 3,
+              "source": "document_2.txt",
+              "similarity_score": 0.5831,
+              "content_preview": "Natural Language Processing\nNatural Language Processing (NLP) is a field of AI that focuses on the interaction between \ncomputers and human language. ..."
+            }
+          ]
+        },
+        {
+          "query": "Explain semantic embeddings and how they enable effective search.",
+          "query_time_seconds": 0.0276,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_8.txt",
+              "similarity_score": 0.7359,
+              "content_preview": "Semantic Search and Embeddings\nSemantic search retrieves documents based on meaning rather than keyword matching. It uses word \nembeddings and sentenc..."
+            },
+            {
+              "rank": 2,
+              "source": "document_10.txt",
+              "similarity_score": 0.5955,
+              "content_preview": "Knowledge Graphs and Information Retrieval\nKnowledge graphs represent structured information about entities and their relationships. \nThey support sem..."
+            },
+            {
+              "rank": 3,
+              "source": "document_12.txt",
+              "similarity_score": 0.556,
+              "content_preview": "Question Answering Systems\nQuestion answering (QA) systems retrieve relevant documents and extract answers to user queries. \nThey combine information ..."
+            }
+          ]
+        }
+      ],
+      "performance_metrics": {
+        "initialization_time_seconds": 6.093
+      },
+      "status": "success"
+    },
+    {
+      "model": "BAAI/bge-large-en-v1.5",
+      "model_display": "BGE - Large English",
+      "timestamp": "2026-02-13T21:20:23.595247",
+      "queries": [
+        {
+          "query": "How do neural networks and deep learning work?",
+          "query_time_seconds": 0.0706,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_3.txt",
+              "similarity_score": 0.7533,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 2,
+              "source": "document_7.txt",
+              "similarity_score": 0.6052,
+              "content_preview": "Transformers and BERT Models\nTransformers are deep learning architectures based on attention mechanisms that process sequences \nin parallel. BERT (Bid..."
+            },
+            {
+              "rank": 3,
+              "source": "document_11.txt",
+              "similarity_score": 0.6043,
+              "content_preview": "Attention Mechanisms in Deep Learning\nAttention mechanisms allow neural networks to focus on relevant parts of input data. \nThe self-attention mechani..."
+            }
+          ]
+        },
+        {
+          "query": "What is the difference between machine learning and artificial intelligence?",
+          "query_time_seconds": 0.0778,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_1.txt",
+              "similarity_score": 0.709,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            },
+            {
+              "rank": 2,
+              "source": "document_3.txt",
+              "similarity_score": 0.6358,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 3,
+              "source": "document_2.txt",
+              "similarity_score": 0.5773,
+              "content_preview": "Natural Language Processing\nNatural Language Processing (NLP) is a field of AI that focuses on the interaction between \ncomputers and human language. ..."
+            }
+          ]
+        },
+        {
+          "query": "Explain semantic embeddings and how they enable effective search.",
+          "query_time_seconds": 0.077,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_8.txt",
+              "similarity_score": 0.7229,
+              "content_preview": "Semantic Search and Embeddings\nSemantic search retrieves documents based on meaning rather than keyword matching. It uses word \nembeddings and sentenc..."
+            },
+            {
+              "rank": 2,
+              "source": "document_10.txt",
+              "similarity_score": 0.5695,
+              "content_preview": "Knowledge Graphs and Information Retrieval\nKnowledge graphs represent structured information about entities and their relationships. \nThey support sem..."
+            },
+            {
+              "rank": 3,
+              "source": "document_7.txt",
+              "similarity_score": 0.5656,
+              "content_preview": "Transformers and BERT Models\nTransformers are deep learning architectures based on attention mechanisms that process sequences \nin parallel. BERT (Bid..."
+            }
+          ]
+        }
+      ],
+      "performance_metrics": {
+        "initialization_time_seconds": 245.808
+      },
+      "status": "success"
+    },
+    {
+      "model": "intfloat/e5-large-v2",
+      "model_display": "E5 - Large v2",
+      "timestamp": "2026-02-13T21:24:29.637155",
+      "queries": [
+        {
+          "query": "How do neural networks and deep learning work?",
+          "query_time_seconds": 0.0848,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_3.txt",
+              "similarity_score": 0.7581,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 2,
+              "source": "document_11.txt",
+              "similarity_score": 0.7342,
+              "content_preview": "Attention Mechanisms in Deep Learning\nAttention mechanisms allow neural networks to focus on relevant parts of input data. \nThe self-attention mechani..."
+            },
+            {
+              "rank": 3,
+              "source": "document_1.txt",
+              "similarity_score": 0.7207,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            }
+          ]
+        },
+        {
+          "query": "What is the difference between machine learning and artificial intelligence?",
+          "query_time_seconds": 0.0921,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_1.txt",
+              "similarity_score": 0.7715,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            },
+            {
+              "rank": 2,
+              "source": "document_3.txt",
+              "similarity_score": 0.734,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 3,
+              "source": "document_2.txt",
+              "similarity_score": 0.7168,
+              "content_preview": "Natural Language Processing\nNatural Language Processing (NLP) is a field of AI that focuses on the interaction between \ncomputers and human language. ..."
+            }
+          ]
+        },
+        {
+          "query": "Explain semantic embeddings and how they enable effective search.",
+          "query_time_seconds": 0.0873,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_8.txt",
+              "similarity_score": 0.7976,
+              "content_preview": "Semantic Search and Embeddings\nSemantic search retrieves documents based on meaning rather than keyword matching. It uses word \nembeddings and sentenc..."
+            },
+            {
+              "rank": 2,
+              "source": "document_10.txt",
+              "similarity_score": 0.7452,
+              "content_preview": "Knowledge Graphs and Information Retrieval\nKnowledge graphs represent structured information about entities and their relationships. \nThey support sem..."
+            },
+            {
+              "rank": 3,
+              "source": "document_12.txt",
+              "similarity_score": 0.7303,
+              "content_preview": "Question Answering Systems\nQuestion answering (QA) systems retrieve relevant documents and extract answers to user queries. \nThey combine information ..."
+            }
+          ]
+        }
+      ],
+      "performance_metrics": {
+        "initialization_time_seconds": 12.104
+      },
+      "status": "success"
+    },
+    {
+      "model": "intfloat/e5-small-v2",
+      "model_display": "E5 - Small v2",
+      "timestamp": "2026-02-13T21:24:42.010956",
+      "queries": [
+        {
+          "query": "How do neural networks and deep learning work?",
+          "query_time_seconds": 0.0884,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_3.txt",
+              "similarity_score": 0.804,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 2,
+              "source": "document_11.txt",
+              "similarity_score": 0.7673,
+              "content_preview": "Attention Mechanisms in Deep Learning\nAttention mechanisms allow neural networks to focus on relevant parts of input data. \nThe self-attention mechani..."
+            },
+            {
+              "rank": 3,
+              "source": "document_4.txt",
+              "similarity_score": 0.7662,
+              "content_preview": "Computer Vision Fundamentals\nComputer vision is an interdisciplinary field that deals with how computers can gain high-level \nunderstanding from digit..."
+            }
+          ]
+        },
+        {
+          "query": "What is the difference between machine learning and artificial intelligence?",
+          "query_time_seconds": 0.1609,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_1.txt",
+              "similarity_score": 0.8166,
+              "content_preview": "Machine Learning Overview\nMachine learning is a subset of artificial intelligence that enables systems to learn \nand improve from experience without b..."
+            },
+            {
+              "rank": 2,
+              "source": "document_3.txt",
+              "similarity_score": 0.7776,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 3,
+              "source": "document_4.txt",
+              "similarity_score": 0.7462,
+              "content_preview": "Computer Vision Fundamentals\nComputer vision is an interdisciplinary field that deals with how computers can gain high-level \nunderstanding from digit..."
+            }
+          ]
+        },
+        {
+          "query": "Explain semantic embeddings and how they enable effective search.",
+          "query_time_seconds": 0.0199,
+          "results": [
+            {
+              "rank": 1,
+              "source": "document_8.txt",
+              "similarity_score": 0.8603,
+              "content_preview": "Semantic Search and Embeddings\nSemantic search retrieves documents based on meaning rather than keyword matching. It uses word \nembeddings and sentenc..."
+            },
+            {
+              "rank": 2,
+              "source": "document_3.txt",
+              "similarity_score": 0.7627,
+              "content_preview": "Deep Learning and Neural Networks\nDeep learning is a subset of machine learning based on neural networks with multiple layers. \nThese artificial neura..."
+            },
+            {
+              "rank": 3,
+              "source": "document_10.txt",
+              "similarity_score": 0.7624,
+              "content_preview": "Knowledge Graphs and Information Retrieval\nKnowledge graphs represent structured information about entities and their relationships. \nThey support sem..."
+            }
+          ]
+        }
+      ],
+      "performance_metrics": {
+        "initialization_time_seconds": 6.372
+      },
+      "status": "success"
+    }
+  ],
+  "aggregated_metrics": {
+    "total_models_tested": 6,
+    "successful_models": 6,
+    "failed_models": 0,
+    "model_comparison": [
+      {
+        "model": "sentence-transformers/all-mpnet-base-v2",
+        "display_name": "Sentence Transformers - All MPNet Base v2",
+        "initialization_time": 6.677,
+        "avg_query_time": 0.0289,
+        "avg_top_result_score": 0.6172
+      },
+      {
+        "model": "all-MiniLM-L6-v2",
+        "display_name": "Sentence Transformers - All MiniLM L6 v2",
+        "initialization_time": 5.612,
+        "avg_query_time": 0.0594,
+        "avg_top_result_score": 0.6133
+      },
+      {
+        "model": "BAAI/bge-base-en-v1.5",
+        "display_name": "BGE - Base English",
+        "initialization_time": 6.093,
+        "avg_query_time": 0.0268,
+        "avg_top_result_score": 0.7377
+      },
+      {
+        "model": "BAAI/bge-large-en-v1.5",
+        "display_name": "BGE - Large English",
+        "initialization_time": 245.808,
+        "avg_query_time": 0.0751,
+        "avg_top_result_score": 0.7284
+      },
+      {
+        "model": "intfloat/e5-large-v2",
+        "display_name": "E5 - Large v2",
+        "initialization_time": 12.104,
+        "avg_query_time": 0.0881,
+        "avg_top_result_score": 0.7757
+      },
+      {
+        "model": "intfloat/e5-small-v2",
+        "display_name": "E5 - Small v2",
+        "initialization_time": 6.372,
+        "avg_query_time": 0.0897,
+        "avg_top_result_score": 0.827
+      }
+    ],
+    "query_performance": {
+      "How do neural networks and deep learning work?": {
+        "max_similarity": 0.804,
+        "min_similarity": 0.6404,
+        "avg_similarity": 0.7253
+      },
+      "What is the difference between machine learning and artificial intelligence?": {
+        "max_similarity": 0.8166,
+        "min_similarity": 0.5411,
+        "avg_similarity": 0.6892
+      },
+      "Explain semantic embeddings and how they enable effective search.": {
+        "max_similarity": 0.8603,
+        "min_similarity": 0.6415,
+        "avg_similarity": 0.7351
+      }
+    }
+  }
+}

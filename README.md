@@ -1,85 +1,96 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/15si9kMD)
-# CS-4015 Agentic AI  
-## Homework 1 – Phase 1: Semantic Search Module
+# AI Research Assistant - Semantic Search Module
+### CS-4015: Agentic AI | Homework #1 (Phase 1)
+**National University of Computer & Emerging Sciences (FAST-NUCES)**
 
-📄 **Read the complete assignment description:**  
-HW1_Phase1_AgenticAI.pdf
-
----
-
-##  Objective
-The goal of this assignment is to build the **memory system** of an AI Research Assistant.
-You will design a **semantic search engine** that retrieves academic documents based on
-meaning rather than keywords.
-
-This phase focuses on:
-- Document embeddings
-- Vector databases
-- Semantic retrieval
-- Retrieval quality analysis
+**Student Name:** Hafsa Imtiaz  
+**Student ID:** 22i-0959  
+**Section:** A  
 
 ---
 
-##  Tasks Overview
+## 🚀 Project Overview
+This project serves as the **Memory System** for an AI Research Assistant. It implements a robust Semantic Search Module designed to help university students navigate vast amounts of academic material (lecture notes, research papers, FAQs) by retrieving information based on **contextual meaning** rather than simple keyword matching.
 
-### Task 1: GUI-Based Data Selection
-Your GUI must allow the user to:
-- Upload or select a dataset (minimum 10–15 text documents)
-- View dataset statistics (number of documents, size)
-- No dataset should be hard-coded in the backend
+This is Assignment 1 of a multi-part series in the Agentic AI course, focusing on the foundational retrieval-augmented generation (RAG) pipeline.
 
-### Task 2: Embedding & Vector Store Configuration
-The GUI must allow the user to select:
-- A Hugging Face embedding model
-- A vector database (FAISS or Chroma)
 
-Based on these selections:
-- Generate embeddings
-- Store them using LangChain
 
-### Task 3: Semantic Retrieval
-Your application must provide:
-- A query input box
-- A configurable `top-k` value
-- Clearly ordered retrieval results based on relevance
+## 🛠️ System Architecture
+The system follows a modular, sequential pipeline architecture using a **Factory Pattern** for vector storage and a **dual-backend** architecture for embeddings.
 
-### Task 4: Retrieval Evaluation & Analysis
-Test your system with:
-- Multiple queries
-- Different datasets
-- Different embedding models
+### 1. Data Module (`loader.py`)
+* Handles dynamic file uploads and filesystem loading.
+* Implements text chunking with a default size of **500 characters** and **50 character overlap** to ensure semantic continuity across boundaries.
 
-Analyze and document the quality of retrieval results.
+### 2. Embeddings Module (`embedding_manager.py`)
+* Supports **6 HuggingFace models** with automatic GPU/CPU detection.
+* Models include: `all-MiniLM-L6-v2`, `all-mpnet-base-v2`, `bge-base-en-v1.5`, `e5-large-v2`, `e5-small-v2`, and `BAAI/bge-large-en-v1.5`.
+
+### 3. Vector Store Module (`store_manager.py`)
+* Implements **FAISS** for high-speed in-memory searches.
+* Implements **ChromaDB** for persistent document storage.
+
+### 4. GUI Module (`gui.py`)
+* Built with **Streamlit** to provide an interactive user experience.
+* Allows real-time configuration of models, databases, and `top-k` retrieval parameters.
 
 ---
 
-## 📁 Project Structure (Must Follow)
+## 📊 Performance Benchmarking
+A key component of this project was the automated evaluation of different embedding models using a dataset of 12 academic documents related to AI/ML.
 
-## 📦 Deliverables
+| Model | Load Time (s) | Avg Top Score | Observations |
+| :--- | :--- | :--- | :--- |
+| **E5 Small v2** | 6.37s | **0.8270** | **Best Performance:** Highest semantic understanding. |
+| **BGE Base English** | 6.09s | 0.7377 | **Best Balance:** Fast query speed + strong accuracy. |
+| **BGE Large English** | 245.81s | 0.7284 | **Inefficient:** Extremely high initialization time. |
+| **All MiniLM L6 v2** | 5.61s | 0.6133 | **Lightweight:** Fast but lower semantic depth. |
 
-1. GUI-based application  
-2. Complete source code  
-3. Short report (2–3 pages)  
-
-All deliverables must be pushed to this repository.
-
----
-
-## 🚫 Restrictions
-- Do NOT hard-code datasets
-- Do NOT hard-code embedding models
-- Do NOT hard-code vector database choice
+> **Note:** During testing, the `all-mpnet-base-v2` model paired with FAISS achieved a maximum similarity score of ~77% on technical research queries, demonstrating high reliability for academic retrieval.
 
 ---
 
-## 📝 Submission Instructions
-Commit your work regularly.  
-Your **latest commit before the deadline** will be graded.
+## ⚙️ Installation & Usage
+
+### Prerequisites
+* Python 3.9+
+* HuggingFace API Token (optional, depending on local cache)
+
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone [your-repository-link]
+   cd [repository-folder]
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the application:
+   ```bash
+   streamlit run gui.py
+   ```
+
+### How to Use
+1. **Upload:** Use the sidebar to upload at least 10-15 `.txt` or `.pdf` documents.
+2. **Configure:** Select your preferred Embedding Model and Vector Store (FAISS/Chroma).
+3. **Initialize:** Click "Process Documents" to generate the vector index.
+4. **Search:** Enter a query in the search bar and adjust the `top-k` slider to view ranked results with relevance scores.
 
 ---
 
-## ⚠️ Academic Integrity
-This is an individual assignment.  
-Plagiarism or code sharing will result in disciplinary action.
+## 📁 Repository Structure
+```text
+├── app/
+│   ├── gui.py                 # Streamlit Interface
+│   ├── loader.py              # Document processing & chunking
+│   ├── embedding_manager.py   # Embedding generation logic
+│   ├── store_manager.py       # Vector DB implementations (Factory Pattern)
+│   └── config.py              # Model and path configurations
+├── data/                      # Sample academic documents
+├── report.pdf                 # Detailed 2-3 page analysis
+└── requirements.txt           # Project dependencies
+```
 
-
+---
+**Disclaimer:** This project was developed for academic purposes as part of the CS-4015 Agentic AI course at FAST-NUCES.

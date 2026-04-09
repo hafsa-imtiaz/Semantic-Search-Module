@@ -68,7 +68,7 @@ A key component of this project was the automated evaluation of different embedd
    ```
 3. Run the application:
    ```bash
-   streamlit run gui.py
+   streamlit run app/gui.py
    ```
 
 ### How to Use
@@ -82,13 +82,23 @@ A key component of this project was the automated evaluation of different embedd
 ## 📁 Repository Structure
 ```text
 ├── app/
-│   ├── gui.py                 # Streamlit Interface
-│   ├── loader.py              # Document processing & chunking
-│   ├── embedding_manager.py   # Embedding generation logic
-│   ├── store_manager.py       # Vector DB implementations (Factory Pattern)
-│   └── config.py              # Model and path configurations
-├── data/                      # Sample academic documents
-├── report.pdf                 # Detailed 2-3 page analysis
+│   ├── gui.py                 # Streamlit interface for user interaction
+│   ├── config.py              # Configuration for models and system paths
+│   └── main.py                # Main application entry script
+├── data/
+│   ├── loader.py              # Document loading and preprocessing logic
+│   └── README.md              # Data module documentation
+├── embeddings/
+│   ├── embedding_manager.py   # Embedding generation and model management
+│   └── README.md              # Embeddings module documentation
+├── Vector_Store/
+│   ├── store_manager.py       # Vector database logic (FAISS/ChromaDB)
+│   └── README.md              # Vector store module documentation
+├── experiments/
+│   ├── test_semantic_search.py # Benchmarking and evaluation scripts
+│   ├── report/                # Directory for experiment results
+│   └── README.md              # Experiments module documentation
+├── HW1_Phase1_AgenticAI.pdf   # Assignment instructions and requirements
 └── requirements.txt           # Project dependencies
 ```
 
